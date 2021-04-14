@@ -1,0 +1,47 @@
+- hosts: local
+  connection: local
+  vars_files:
+      - credential.yml
+  vars:
+     keypair: arfaizu
+  tasks:
+  - name: launch Master Node AWS cloud
+    ec2:
+          key_name: "{{ keypair }}"
+          instance_type: "t2.2xlarge"
+          image:  "ami-05d72852800cbf29e"
+          wait: yes
+          count: 1
+          vpc_subnet_id: "subnet-7e29cf03"
+          group_id: sg-023b71f4c4683ff88
+          assign_public_ip: yes
+          region: "us-east-2"
+          state: present
+          group: "default"
+          aws_access_key: "{{ accesskey   }}"
+          aws_secret_key: "{{  secretkey   }}"
+          instance_tags: {"Name": "Master", "Cluster": "k8s Cluster"}
+
+- hosts: local
+  connection: local
+  vars_files:
+      - credential.yml
+  vars:
+     keypair: arfaizu
+  tasks:
+  - name: launch Worker Node on AWS cloud
+    ec2:
+          key_name: "{{ keypair }}"
+          instance_type: "t2.xlarge"
+          image:  "ami-05d72852800cbf29e"
+          wait: yes
+          count: 2
+          vpc_subnet_id: "subnet-7e29cf03"
+          group_id: sg-023b71f4c4683ff88
+          assign_public_ip: yes
+          region: "us-east-2"
+          state: present
+          group: "default"
+          aws_access_key: "{{ accesskey   }}"
+          aws_secret_key: "{{  secretkey   }}"
+          instance_tags: {"Name": "Worker", "Cluster": "k8s Cluster"}

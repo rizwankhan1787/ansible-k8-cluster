@@ -1,0 +1,11 @@
+[local]
+localhost ansible_python_interpreter=/usr/bin/python3
+
+[master_node]
+3.17.56.116
+
+[worker_node]
+3.17.130.191
+18.223.186.125
+
+
