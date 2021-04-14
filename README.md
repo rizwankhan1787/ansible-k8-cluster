@@ -13,7 +13,7 @@ ansible-playbook -i hosts cluster.yml -u root
 To configure scheduling in aws create a new role as below and execute the playbook
 
 ---
-  - name: Configure the overseer host.
+  - name: Configure the schedule host.
     hosts: schedule
     gather_facts: yes
     sudo: yes
